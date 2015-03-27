@@ -6,6 +6,7 @@
     android:textColor="@color/primaryColor"
     android:textSize="20dp"
     android:id="@+id/text"
+
     >
 
 </TextView>

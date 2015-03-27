@@ -48,6 +48,17 @@ public class MainActivity extends ActionBarActivity {
         mVPager = (ViewPager) findViewById(R.id.pager);
         mVPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
         mTabs = (SlidingTabLayout) findViewById(R.id.tabs);
+        //mTabs.setCustomTabView(R.layout.custom_tab,R.id.tabText);
+        mTabs.setDistributeEvenly(true);
+        mTabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
+            @Override
+            public int getIndicatorColor(int position) {
+                return getResources().getColor(R.color.accentColor);
+            }
+
+        });
+
+
         mTabs.setViewPager(mVPager);
     }
 
@@ -83,7 +94,8 @@ public class MainActivity extends ActionBarActivity {
 
     class MyPagerAdapter extends FragmentPagerAdapter{
 
-        String[] tabs;
+        //int icons[] = {R.mipmap.ic_computer_white_48dp,R.mipmap.ic_headset_mic_white_48dp,R.mipmap.ic_keyboard_alt_white_48dp };
+        String[] tabs = getResources().getStringArray(R.array.tabs);
 
         public MyPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -98,6 +110,15 @@ public class MainActivity extends ActionBarActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
+
+
+            /*Drawable drawable = getResources().getDrawable(icons[position]);
+            drawable.setBounds(0,0,36,36);
+            ImageSpan imageSpan = new ImageSpan(drawable);
+            SpannableString spannableString = new SpannableString(" ");
+            spannableString.setSpan(imageSpan,0,spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            return spannableString;
+            */
             return tabs[position];
 
         }
@@ -106,6 +127,8 @@ public class MainActivity extends ActionBarActivity {
         public int getCount() {
             return 3;
         }
+
+
     }
 
     public static class MyFragment extends Fragment{
